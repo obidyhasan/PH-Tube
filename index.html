@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PH Tube - Web Based Video Stream</title>
+
+    <!-- Daisy Ui & Tailwind CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
   </head>
   <body>
+    <!-- Header Section -->
+    <header class="border-b">
+      <nav
+        class="max-w-7xl mx-auto my-5 px-5 flex justify-between items-center"
+      >
+        <!-- Logo -->
+        <a href="#" class="w-28"><img src="./assets/Logo.png" alt="" /></a>
+        <!-- Search -->
+        <label
+          class="input input-bordered flex items-center gap-2 input-sm rounded"
+        >
+          <input type="text" class="grow" placeholder="Search" />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <!-- Sort -->
+        <button class="btn btn-error text-white w-20 rounded btn-sm">
+          Sort
+        </button>
+      </nav>
+    </header>
+
+    <!-- Tab Section -->
+    <section
+      id="catagoreyContainer"
+      class="flex gap-4 justify-center items-center m-5"
+    >
+      <button class="btn w-20 rounded btn-error text-white btn-sm">All</button>
+    </section>
+
+    <!-- Video Section -->
+    <section id="videoContainer"></section>
+
     <!-- Script -->
     <script src="./js/script.js"></script>
   </body>
