@@ -21,17 +21,20 @@
   </head>
   <body>
     <!-- Header Section -->
-    <header class="border-b">
-      <nav
-        class="max-w-7xl mx-auto my-5 px-5 flex justify-between items-center"
-      >
+    <header class="border-b sticky top-0 py-5 bg-white z-10">
+      <nav class="w-11/12 mx-auto flex justify-between items-center">
         <!-- Logo -->
         <a href="#" class="w-28"><img src="./assets/Logo.png" alt="" /></a>
         <!-- Search -->
         <label
           class="input input-bordered flex items-center gap-2 input-sm rounded"
         >
-          <input type="text" class="grow" placeholder="Search" />
+          <input
+            id="searchInput"
+            type="text"
+            class="grow"
+            placeholder="Search"
+          />
           <i class="fa-solid fa-magnifying-glass"></i>
         </label>
         <!-- Sort -->
@@ -43,14 +46,25 @@
 
     <!-- Tab Section -->
     <section
-      id="catagoreyContainer"
+      id="categoryContainer"
       class="flex gap-4 justify-center items-center m-5"
     >
-      <button class="btn w-20 rounded btn-error text-white btn-sm">All</button>
+      <div>
+        <button
+          id="allBtn"
+          onclick="getVideos()"
+          class="btn w-20 rounded btn-error text-white btn-sm button-active"
+        >
+          All
+        </button>
+      </div>
     </section>
 
     <!-- Video Section -->
-    <section id="videoContainer"></section>
+    <section
+      id="videoContainer"
+      class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
+    ></section>
 
     <!-- Script -->
     <script src="./js/script.js"></script>
