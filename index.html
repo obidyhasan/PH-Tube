@@ -38,7 +38,10 @@
           <i class="fa-solid fa-magnifying-glass"></i>
         </label>
         <!-- Sort -->
-        <button class="btn btn-error text-white w-20 rounded btn-sm">
+        <button
+          onclick="sortVideo()"
+          class="btn btn-error text-white w-20 rounded btn-sm"
+        >
           Sort
         </button>
       </nav>
@@ -65,6 +68,27 @@
       id="videoContainer"
       class="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
     ></section>
+
+    <!-- Modal -->
+    <!-- Open the modal using ID.showModal() method -->
+    <button
+      id="showModalBtn"
+      class="btn hidden"
+      onclick="detailsVideo.showModal()"
+    >
+      open modal
+    </button>
+
+    <dialog id="detailsVideo" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div id="modal-container"></div>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <!-- Script -->
     <script src="./js/script.js"></script>

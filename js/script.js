@@ -77,11 +77,20 @@ const showVideos = (videos) => {
   videos.map((item) => {
     const container = document.createElement("div");
     container.innerHTML = `
-        <div class="card rounded-md">
-            <figure class="rounded-md">
+        <div onclick="showDetails('${item.video_id}')" class="card rounded-md">
+            <figure class="rounded-md relative">
                 <img src=${
                   item.thumbnail
                 } class="w-full h-[200px] object-cover " />
+
+                ${
+                  item.others.posted_date.length == 0
+                    ? ""
+                    : `<div class="absolute right-2 bottom-2 bg-black text-white text-xs py-1 px-2 rounded">
+                      ${convert(Number(item.others.posted_date))}
+                    </div>`
+                }
+
             </figure>
 
             <div class="my-3 flex gap-3">
@@ -113,12 +122,74 @@ const showVideos = (videos) => {
   });
 };
 
+// Show modal
+const showDetails = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
+  );
+  const data = await res.json();
+
+  const modal = document.querySelector("#modal-container");
+  modal.innerHTML = `
+      <figure class="rounded-md">
+        <img src=${data.video.thumbnail} class="w-full h-[300px] object-cover " />
+      </figure>
+      <h1 class="font-bold text-xl my-5">${data.video.title}</h1>
+      <p>${data.video.description}</p>
+  `;
+
+  // Way 1:
+  // document.querySelector("#showModalBtn").click();
+  // way 2:
+  document.querySelector("#detailsVideo").showModal();
+};
+
+// Convert number to Data
+const convert = (number) => {
+  const year = parseInt(number / 31556952);
+  number %= 31556952;
+  const month = parseInt(number / 2629746);
+  number = number % 2629746;
+  const day = parseInt(number / 86400);
+  number %= 86400;
+  const hour = parseInt(number / 3600);
+  number %= 3600;
+  const minute = parseInt(number / 60);
+
+  if (year !== 0) {
+    return `${year} years ${month} months ago`;
+  } else if (month !== 0) {
+    return `${month} months ${day} days ago`;
+  } else if (day !== 0) {
+    return `${day} days ${hour} hours ago`;
+  } else {
+    return `${hour} hours ${minute} minutes ago`;
+  }
+};
+
 // Search
 document.querySelector("#searchInput").addEventListener("keyup", (e) => {
   getVideos(e.target.value);
 });
 
 // Sort
+const sortVideo = () => {
+  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+    .then((res) => res.json())
+    .then((data) => sortObj(data.videos))
+    .catch((err) => console.log(err));
+};
+
+// Sort Object
+const sortObj = (item) => {
+  const arr = item.map((a) => {
+    const str = a.others.views;
+    const number = parseInt(str.slice(0, str.length - 1));
+    return number;
+  });
+
+  console.log(arr.sort((a, b) => b - a));
+};
 
 getCategory();
 getVideos();
