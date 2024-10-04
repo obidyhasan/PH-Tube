@@ -182,13 +182,14 @@ const sortVideo = () => {
 
 // Sort Object
 const sortObj = (item) => {
-  const arr = item.map((a) => {
-    const str = a.others.views;
-    const number = parseInt(str.slice(0, str.length - 1));
-    return number;
+  item.sort((a, b) => {
+    const viewA = parseInt(a.others.views.slice(0, a.others.views.length - 1));
+    const viewB = parseInt(b.others.views.slice(0, b.others.views.length - 1));
+
+    return viewB - viewA;
   });
 
-  console.log(arr.sort((a, b) => b - a));
+  showVideos(item);
 };
 
 getCategory();
